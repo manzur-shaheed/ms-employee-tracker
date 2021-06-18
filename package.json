@@ -4,7 +4,8 @@
   "description": "Simple app to track employees",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js"
   },
   "repository": {
     "type": "git",
@@ -15,5 +16,11 @@
   "bugs": {
     "url": "https://github.com/manzur-shaheed/ms-employee-tracker/issues"
   },
-  "homepage": "https://github.com/manzur-shaheed/ms-employee-tracker#readme"
+  "homepage": "https://github.com/manzur-shaheed/ms-employee-tracker#readme",
+  "dependencies": {
+    "dotenv": "^10.0.0",
+    "g": "^2.0.1",
+    "inquirer": "^8.1.1",
+    "mysql": "^2.18.1"
+  }
 }
