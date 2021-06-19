@@ -1,6 +1,4 @@
 // view function for all tables
-
-
 const viewTable = (connection, action, table) => {
   switch(table) {
       case "Employee":
