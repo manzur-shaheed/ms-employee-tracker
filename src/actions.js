@@ -1,6 +1,7 @@
 // actions
 const viewTable = require('./viewTable');
-const add = require('./add');
+const addRec = require('./addRec');
+const delRec = require('./delRec');
 
 const actions = (connection, action, table) => {
     switch(action) {
@@ -8,7 +9,10 @@ const actions = (connection, action, table) => {
             viewTable(connection, action, table);
             break;
         case "Add":
-            add(connection, action, table);
+            addRec(connection, action, table);
+            break;
+        case "Delete":
+            delRec(connection, action, table);
             break;
     }
 }
