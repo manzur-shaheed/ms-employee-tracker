@@ -2,6 +2,7 @@
 const viewTable = require('./viewTable');
 const addRec = require('./addRec');
 const delRec = require('./delRec');
+const departmentBudget = require('./departmentBudget');
 
 const actions = (connection, action, table) => {
     switch(action) {
@@ -14,7 +15,19 @@ const actions = (connection, action, table) => {
         case "Delete":
             delRec(connection, action, table);
             break;
-    }
+        case "Update Employee Role":
+            updateEmployeeRole(connection, action, table);
+            break;
+        case "Update Employee Manager":
+            updateEmployeeManager(connection, action, table);
+            break;
+        case "View Employees by Manager":
+            viewEmployeeByManager(connection, action, table);
+            break;
+        case "Department Budget":
+            departmentBudget(connection);
+            break;
+        }
 }
 
 // export 
