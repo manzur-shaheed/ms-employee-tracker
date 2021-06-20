@@ -3,6 +3,9 @@ const viewTable = require('./viewTable');
 const addRec = require('./addRec');
 const delRec = require('./delRec');
 const departmentBudget = require('./departmentBudget');
+const viewEmployeeByManager = require('./viewEmployeeByManager');
+const updateEmployeeManager = require('./updateEmployeeManager');
+const updateEmployeeRole = require('./updateEmployeeRole');
 
 const actions = (connection, action, table) => {
     switch(action) {

@@ -8,7 +8,8 @@ const addRec = (connection, action, table) => {
           if (err) throw err;
           let managers = [];
 
-          for(i=0; i<res.length; i++) {
+          managers.push('0:None');
+          for(i=1; i<res.length; i++) {
             managers.push(res[i].manager);
           }
           connection.query("SELECT CONCAT(id,':',title) AS title FROM role ORDER BY id", (err1, res1) => {
@@ -43,7 +44,13 @@ const addRec = (connection, action, table) => {
               }]
             )
             .then((data) => {
-              query = `INSERT INTO employee (first_name, last_name, role_id, manager_id) VALUES ('${data.first}', '${data.last}', ${data.role_id.split(':')[0]}, ${data.manager_id.split(':')[0]})`;
+              let manager_id = data.manager_id.split(':')[0];
+              if (manager_id === '0') {
+                query = `INSERT INTO employee (first_name, last_name, role_id) VALUES ('${data.first}', '${data.last}', ${data.role_id.split(':')[0]})`;
+              }
+              else {
+                query = `INSERT INTO employee (first_name, last_name, role_id, manager_id) VALUES ('${data.first}', '${data.last}', ${data.role_id.split(':')[0]}, ${manager_id})`;
+              }              
               // console.log(query);
               connection.query(query, (err2, res2) => {
                 if (err2) throw err2;

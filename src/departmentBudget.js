@@ -23,7 +23,7 @@ const departmentBudget = (connection) => {
         const bonus = require('./bonus');
         if (err1) throw err1;
         // console.log(res1[0].budget);
-        console.log(`Total budget for ${data.dept_id.split(':')[1]} is: ${res1[0].budget}`)
+        console.log(`Total budget for ${data.dept_id.split(':')[1]} is: $${res1[0].budget.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}`);
         bonus(connection);
       });
     });
