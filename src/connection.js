@@ -17,10 +17,5 @@ connection.connect((err) => {
     // console.log(`connected as id ${connection.threadId}`);
 });
 
-// end mysql connection
-const terminate = () => {
-    connection.end();
-}
-
 // export 
 module.exports = connection;

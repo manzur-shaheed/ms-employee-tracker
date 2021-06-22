@@ -8,6 +8,7 @@ const updateEmployeeManager = require('./updateEmployeeManager');
 const updateEmployeeRole = require('./updateEmployeeRole');
 
 const actions = (connection, action, table) => {
+    // console.log(action);
     switch(action) {
         case "View":
             viewTable(connection, action, table);

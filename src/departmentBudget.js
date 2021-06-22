@@ -2,6 +2,7 @@
 const inquirer = require('inquirer');
 
 const departmentBudget = (connection) => {
+  // console.log("Department Budget");
   connection.query("SELECT CONCAT(id,':',name) AS ID_NAME FROM department ORDER BY id", (err, res) => {
     if (err) throw err;
     let depts = [];

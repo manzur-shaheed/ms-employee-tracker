@@ -14,12 +14,13 @@ const bonus = (connection) => {
   .then((data) => {
       // console.log(action);
       const main = require('./main');
+    //   console.log(data.selection);
       switch(data.selection) {
           case "Return to Main":
               main(connection);
               break;
           default:
-              actions(connection, "Bonus", data.selection);
+              actions(connection, data.selection, '');
               break;
       };
   });
