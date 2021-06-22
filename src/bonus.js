@@ -19,7 +19,7 @@ const bonus = (connection) => {
               main(connection);
               break;
           default:
-              actions(connection, data.selection);
+              actions(connection, "Bonus", data.selection);
               break;
       };
   });
