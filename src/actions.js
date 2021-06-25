@@ -7,6 +7,7 @@ const viewEmployeeByManager = require('./viewEmployeeByManager');
 const updateEmployeeManager = require('./updateEmployeeManager');
 const updateEmployeeRole = require('./updateEmployeeRole');
 
+// all these actions are based on whatever menu item user chose
 const actions = (connection, action, table) => {
     // console.log(action);
     switch(action) {

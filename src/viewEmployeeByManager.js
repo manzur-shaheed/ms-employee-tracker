@@ -2,6 +2,7 @@
 const inquirer = require('inquirer');
 
 const viewEmployeeByManager = (connection) => {
+  // get all managers
   connection.query("SELECT CONCAT(id,':',first_name, ' ', last_name) AS manager FROM employee where manager_id is NULL ORDER BY id", (err, res) => {
     if (err) throw err;
     let managers = [];
@@ -9,6 +10,7 @@ const viewEmployeeByManager = (connection) => {
     for(i=0; i<res.length; i++) {
       managers.push(res[i].manager);
     }
+    // prompt to select one manager
     inquirer.prompt(
       questions = [{
         type: "list",
@@ -18,6 +20,7 @@ const viewEmployeeByManager = (connection) => {
       }]
     )
     .then((data) => {
+      // display all employees under this manager
       query = `SELECT first_name, last_name, title, salary FROM employee as e LEFT JOIN role as r on e.role_id = r.id WHERE manager_id = ${data.manager_id.split(':')[0]}`;
       connection.query(query, (err1, res1) => {
         const bonus = require('./bonus');

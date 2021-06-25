@@ -3,7 +3,9 @@ const inquirer = require('inquirer');
 const subMenu = require('./subMenu');
 const bonus = require('./bonus');
 
+// main menu items
 const main = (connection) => {
+    // main menu items
     inquirer.prompt(
         questions = [{
           type: "list",

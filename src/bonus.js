@@ -1,9 +1,10 @@
-// sub menu functions
+// bonus menu functions
 const inquirer = require('inquirer');
 const actions = require('./actions');
 
 const bonus = (connection) => {
   inquirer.prompt(
+      // bonus menu items
       questions = [{
           type: "list",
           name: "selection",

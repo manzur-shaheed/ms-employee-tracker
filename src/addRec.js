@@ -4,6 +4,7 @@ const inquirer = require('inquirer');
 const addRec = (connection, action, table) => {
   switch(table) {
       case "Employee":
+        // get all managers - so we can select one manager for the new employee
         connection.query("SELECT CONCAT(id,':',first_name, ' ', last_name) AS manager FROM employee where manager_id is NULL ORDER BY id", (err, res) => {
           if (err) throw err;
           let managers = [];
@@ -12,6 +13,7 @@ const addRec = (connection, action, table) => {
           for(i=1; i<res.length; i++) {
             managers.push(res[i].manager);
           }
+          // get all roles so we can select one for the employee
           connection.query("SELECT CONCAT(id,':',title) AS title FROM role ORDER BY id", (err1, res1) => {
             if (err1) throw err1;
             let roles = [];
@@ -19,6 +21,7 @@ const addRec = (connection, action, table) => {
             for(i=0; i<res1.length; i++) {
               roles.push(res1[i].title);
             } 
+            // prompt user for input data
             inquirer.prompt(
               questions = [{
                 type: "input",
@@ -43,6 +46,7 @@ const addRec = (connection, action, table) => {
                 choices: managers
               }]
             )
+            // add new employee to table once we have all data 
             .then((data) => {
               let manager_id = data.manager_id.split(':')[0];
               if (manager_id === '0') {
@@ -55,6 +59,7 @@ const addRec = (connection, action, table) => {
               connection.query(query, (err2, res2) => {
                 if (err2) throw err2;
                 const viewTable = require('./viewTable');
+                // display data once we have added new employee
                 viewTable(connection, "Add", "Employee");
               });
             });
@@ -62,6 +67,7 @@ const addRec = (connection, action, table) => {
         });
         break;
       case "Role":
+        // get all department so we can select one for the new role
         connection.query("SELECT CONCAT(id,':',name) AS ID_NAME FROM department ORDER BY id", (err, res) => {
           if (err) throw err;
           let depts = [];
@@ -69,6 +75,7 @@ const addRec = (connection, action, table) => {
           for(i=0; i<res.length; i++) {
             depts.push(res[i].ID_NAME);
           }
+          // prompt user for input data
           inquirer.prompt(
             questions = [{
               type: "input",
@@ -87,11 +94,13 @@ const addRec = (connection, action, table) => {
               choices: depts
             }]
           )
+          // add role to table once we have all data
           .then((data) => {
             query = `INSERT INTO role (title, salary, department_id) VALUES ('${data.title}', ${data.salary}, ${data.dept_id.split(':')[0]})`;
             // console.log(query);
             connection.query(query, (err1, res1) => {
               if (err1) throw err1;
+              // display data once we have added new role
               const viewTable = require('./viewTable');
               viewTable(connection, "Add", "Role");
             });
@@ -99,6 +108,7 @@ const addRec = (connection, action, table) => {
         });     
         break;
       case "Department":
+          // prompt user for input data
           inquirer.prompt(
             questions = [{
               type: "input",
@@ -111,6 +121,7 @@ const addRec = (connection, action, table) => {
             connection.query(query, (err, res) => {
               if (err) throw err;
               const viewTable = require('./viewTable');
+              // display data once we have added new department
               viewTable(connection, "Add", "Department");
             });
           });

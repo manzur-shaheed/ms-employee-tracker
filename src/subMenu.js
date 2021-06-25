@@ -2,14 +2,16 @@
 const inquirer = require('inquirer');
 const actions = require('./actions');
 
+// submenu items - shows tables to act on
 const subMenu = (connection, action) => {
   inquirer.prompt(
-      questions = [{
-          type: "list",
-          name: "selection",
-          message: `Please select ${action} menu option: `,
-          choices: ["Employee", "Role", "Department", "Return to Main"]
-        }]        
+    // submenu items
+    questions = [{
+        type: "list",
+        name: "selection",
+        message: `Please select ${action} menu option: `,
+        choices: ["Employee", "Role", "Department", "Return to Main"]
+    }]        
   )
   .then((data) => {
       // console.log(action);
